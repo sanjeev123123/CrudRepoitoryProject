@@ -1,0 +1,65 @@
+﻿@model User
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-6 offset-3 border border-success rounded rounded-3 p-4">
+            <h3 class="text-info p-2 m-1 text-center">Add User</h3>
+            <form method="post" asp-action="Create">
+
+
+                <div class="form-check">
+                    <label asp-for="Name"></label>
+                    <input type="text" asp-for="Name" class="form-control" placeholder="Enter Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-check">
+                    <label asp-for="Gender"></label><br />
+                    <label>
+                        <input type="radio" class="form-check-inline" name="Gender" asp-for="Gender" value="Male" /> Male
+                    </label>
+                    <label> <input type="radio" class="form-check-inline" name="Gender" asp-for="Gender" value="Female" /> Female</label>
+                    <label>
+                        <input type="radio" class="form-check-inline" name="Gender" asp-for="Gender" value="Other" /> Other
+                    </label>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+
+                <div class="form-check">
+                    <label asp-for="Email"></label>
+                    <input type="email" asp-for="Email" class="form-control" placeholder="Enter Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-check">
+                    <label asp-for="Pincode"></label>
+                    <input type="text" asp-for="Pincode" class="form-control" placeholder="Enter Pincode" />
+                    <span asp-validation-for="Pincode" class="text-danger"></span>
+                </div>
+
+                <div class="form-check">
+                    <label asp-for="IsActive"></label>
+                    <input type="checkbox" asp-for="IsActive" class="form-check-inline" checked="checked" />
+                </div>
+
+                <div>
+                    <input type="submit" class="btn btn-primary p-2 m-2" value="Save" />
+
+                    <a class="btn btn-outline-primary p-2 m-2" asp-controller="user" asp-action="Index">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

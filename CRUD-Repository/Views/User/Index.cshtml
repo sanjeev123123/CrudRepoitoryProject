@@ -1,0 +1,73 @@
+﻿@model IEnumerable<User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Users List</h1>
+
+<div class="container">
+    <div class="row ">
+        @*d-block*@
+
+        @if (TempData["mess"] != null)
+        {
+            <div class="alert text-center alert-info notification" role="alert">
+                @TempData["mess"]
+            </div>
+        }
+
+        <div class="col-10 offset-1">
+            <div class="float-right">
+                <a class="btn btn-primary p-1 m-1" asp-action="Create" asp-controller="User">Add Users</a>
+            </div>
+            <table class="table table-hover table-bordered table-striped">
+                <thead class="text-center text-light bg-dark">
+                    <tr>
+                        <th>UserId </th>
+                        <th>Name </th>
+                        <th>Gender </th>
+                        <th>Email </th>
+                        <th>Pincode </th>
+                        <th>IsActive </th>
+                        <th>Action </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var d in Model)
+                    {
+                        <tr class="text-center">
+                            <td>@d.UserId</td>
+                            <td>@d.Name</td>
+                            <td>@d.Gender</td>
+                            <td>@d.Email</td>
+                            <td>@d.Pincode</td>
+                            @*<td>@d.IsActive</td>*@
+                            <td>
+                                @if (d.IsActive)
+                                {
+                                    <input type="checkbox" disabled checked="checked" value="@d.IsActive" />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" disabled value="@d.IsActive" />
+                                }
+
+                            </td>
+
+
+                            <td>
+                                <a class="btn btn-primary m-1" asp-controller="user" asp-action="Edit" asp-route-id="@d.UserId">Edit</a>
+                                <a class="btn btn-info m-1" asp-controller="user" asp-action="Detail" asp-route-id="@d.UserId">Detail</a>
+                                <a class="btn btn-danger m-1" asp-controller="user" asp-action="Delete" asp-route-id="@d.UserId" onclick="return confirm('Are You Sure Delete ?  User Id : ' + @d.UserId)" >Delete</a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>
